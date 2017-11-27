@@ -1,0 +1,17 @@
+# The following types define the data model of the example service
+# based on which the GraphQL API is generated
+
+input SignupInput {
+  email: String!
+  name: String!
+  password: String!
+  job: String
+}
+
+type User @model {
+    id: ID! @isUnique
+    email: String! @isUnique
+    name: String!
+    password: String!
+    job: String
+}
