@@ -14,10 +14,6 @@
 # Happy Coding!
 
 
-#  Simple API:        https://api.graph.cool/simple/v1/cjab5qa5m16uy010481y9u0n2
-#  Relay API:         https://api.graph.cool/relay/v1/cjab5qa5m16uy010481y9u0n2
-#  Subscriptions API: wss://subscriptions.graph.cool/v1/cjab5qa5m16uy010481y9u0n2
-
 # In the types.graphql you define your data schema
 types: ./types.graphql
 

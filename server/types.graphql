@@ -1,15 +1,11 @@
-# The following types define the data model of the example service
-# based on which the GraphQL API is generated
-
-input SignupInput {
-  email: String!
-  name: String!
-  password: String!
-  job: String
-}
+#Simple API:        https://api.graph.cool/simple/v1/cjai580w41six0149q35eedaz
+#Relay API:         https://api.graph.cool/relay/v1/cjai580w41six0149q35eedaz
+#Subscriptions API: wss://subscriptions.graph.cool/v1/cjai580w41six0149q35eedaz
 
 type User @model {
     id: ID! @isUnique
+    createdAt: DateTime!
+    updatedAt: DateTime!
     email: String! @isUnique
     name: String!
     password: String!
