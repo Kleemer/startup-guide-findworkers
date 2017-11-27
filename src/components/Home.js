@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
-import environment from '../Environment'
+import Environment from '../Environment'
 import ListPage from './ListPage'
 
 const HomeAllUsersQuery = graphql`
@@ -16,7 +16,7 @@ class Home extends Component {
     return (
       <div>
         <QueryRenderer
-          environment={environment}
+          environment={Environment}
           query={HomeAllUsersQuery}
           render={({error, props}) => {
             if (error) { return <div>{error.source}</div> }
