@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
-import SingupMutation from '../mutations/SignupMutation'
+
 class Signup extends Component {
 
     state = {
@@ -59,8 +59,8 @@ class Signup extends Component {
         )
     }
 
-    _handleSignup() {
-
+    _handleSignup = () => {
+        
     }
 }
 

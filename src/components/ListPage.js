@@ -16,7 +16,6 @@ class ListPage extends Component {
 
 export default createFragmentContainer(ListPage, graphql`
 fragment ListPage_viewer on Viewer {
-  ...User_viewer
   allUsers(last: 5, orderBy: createdAt_DESC) @connection(key: "ListPage_allUsers", filters: []) {
     edges {
       node {

@@ -12,6 +12,8 @@ type CreateUserPayload {
   viewer: Viewer!
 }
 
+scalar DateTime
+
 input DeleteUserInput {
   id: ID!
   clientMutationId: String!
@@ -114,11 +116,13 @@ type UpdateUserPayload {
 }
 
 type User implements Node {
+  createdAt: DateTime!
   email: String!
   id: ID!
   job: String
   name: String!
   password: String!
+  updatedAt: DateTime!
 }
 
 # A connection to a list of items.
@@ -148,6 +152,28 @@ input UserFilter {
 
   # Logical OR on all given filters.
   OR: [UserFilter!]
+  createdAt: DateTime
+
+  # All values that are not equal to given value.
+  createdAt_not: DateTime
+
+  # All values that are contained in given list.
+  createdAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  createdAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  createdAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  createdAt_lte: DateTime
+
+  # All values greater than the given value.
+  createdAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  createdAt_gte: DateTime
   email: String
 
   # All values that are not equal to given value.
@@ -348,9 +374,33 @@ input UserFilter {
 
   # All values not ending with the given string.
   password_not_ends_with: String
+  updatedAt: DateTime
+
+  # All values that are not equal to given value.
+  updatedAt_not: DateTime
+
+  # All values that are contained in given list.
+  updatedAt_in: [DateTime!]
+
+  # All values that are not contained in given list.
+  updatedAt_not_in: [DateTime!]
+
+  # All values less than the given value.
+  updatedAt_lt: DateTime
+
+  # All values less than or equal the given value.
+  updatedAt_lte: DateTime
+
+  # All values greater than the given value.
+  updatedAt_gt: DateTime
+
+  # All values greater than or equal the given value.
+  updatedAt_gte: DateTime
 }
 
 enum UserOrderBy {
+  createdAt_ASC
+  createdAt_DESC
   email_ASC
   email_DESC
   id_ASC
@@ -361,6 +411,8 @@ enum UserOrderBy {
   name_DESC
   password_ASC
   password_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 # This is the famous Relay viewer object
