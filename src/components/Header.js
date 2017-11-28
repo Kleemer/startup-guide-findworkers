@@ -9,7 +9,8 @@ class Header extends Component {
             <div className="hero-head">
                 <nav className="navbar">
                 <div id="navbarMenuHeroA" className="navbar-menu">
-                    <Link className="navbar-item" to="/search">search</Link>
+                    <Link className="navbar-item" to="/">Home</Link>
+                    <Link className="navbar-item" to="/search">Search</Link>
                     {
                         userId ?
                         <div className="navbar-end">                        
@@ -23,8 +24,8 @@ class Header extends Component {
                         </div>
                         :
                         <div className="navbar-end">                        
-                                <Link className="navbar-item" to="/login">login</Link>
-                                <Link className="navbar-item" to="/signup">signup</Link>
+                                <Link className="navbar-item" to="/login">Login</Link>
+                                <Link className="navbar-item" to="/signup">Signup</Link>
                         </div>
                     }
                     </div>

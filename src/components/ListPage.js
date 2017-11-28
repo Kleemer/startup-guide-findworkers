@@ -16,7 +16,9 @@ class ListPage extends Component {
 
 export default createFragmentContainer(ListPage, graphql`
 fragment ListPage_viewer on Viewer {
-  allUsers(last: 5, orderBy: createdAt_DESC) @connection(key: "ListPage_allUsers", filters: []) {
+  allUsers(filter: { job_contains: searchText }, last: 5, orderBy: createdAt_DESC)
+  @connection(key: "ListPage_allUsers", filters: [])
+  @argumentDefinitions(searchText: { type: "String", defaultValue: "" }) {
     edges {
       node {
         ...UserCard_user
