@@ -3,14 +3,20 @@ import { ConnectionHandler } from 'relay-runtime'
 import Environment from '../../Environment'
 
 const mutation = graphql`
-    mutation CreateUserMutation($input: SignupUserInput!) {
-        createUser(input: $input) {
+    mutation CreateUserMutation($createUserInput: SignupUserInput!, $loginInput: LoginInput!) {
+        createUser(input: $createUserInput) {
             user {
                 id
                 email
                 name
                 password
                 job
+            }
+        }
+        login(input: $loginInput) {
+            token
+            user {
+                id
             }
         }
     }
@@ -20,11 +26,16 @@ let tempID = 0
 
 export default (email, name, password, job, viewerId, callback) => {
     const variables = {
-        input: {
+        createUserInput: {
             email,
             name,
             password,
             job,
+            clientMutationId: ""
+        },
+        loginInput: {
+            email,
+            password,
             clientMutationId: ""
         }
     }
@@ -60,8 +71,10 @@ export default (email, name, password, job, viewerId, callback) => {
                     ConnectionHandler.insertEdgeAfter(connection, newUser)
                 }
             },
-            onCompleted: () => {
-                callback()
+            onCompleted: (response) => {
+                const id = response.createUser.user.id
+                const token = response.login.token
+                callback(id, token)
             },
             onError: err => console.error(err)
         }

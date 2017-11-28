@@ -37,6 +37,7 @@ type Mutation {
   updateOrCreateUser(input: UpdateOrCreateUserInput!): UpdateOrCreateUserPayload
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
   createUser(input: SignupUserInput!): CreateUserPayload!
+  login(input: LoginInput!): LoginPayload!
 }
 
 # An object with an ID
@@ -68,6 +69,18 @@ type Query {
     # The ID of an object
     id: ID!
   ): Node
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+  clientMutationId: String!
+}
+
+
+type LoginPayload {
+  user: User
+  token: String
 }
 
 input SignupUserInput {
