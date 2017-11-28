@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Home from './components/Home'
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Search from './components/Search';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
@@ -17,7 +18,8 @@ ReactDOM.render(
                 <Route exact path='/' component={Home}/>
                 <Route exact path='/login' component={Login}/>
                 <Route exact path='/signup' component={Signup}/>
-            </Switch>
+                <Route exact path='/search' component={Search}/>
+                </Switch>
         </div>
     </BrowserRouter>
     , document.getElementById('root')

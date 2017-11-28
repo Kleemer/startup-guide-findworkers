@@ -6,14 +6,14 @@ class UserCard extends React.Component {
     render() {
         return (
             <div>
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
+                <div className="card">
+                    <header className="card-header">
+                        <p className="card-header-title">
                             {this.props.user.name}
                         </p>
                     </header>
-                    <div class="card-content">
-                        <div class="content">
+                    <div className="card-content">
+                        <div className="content">
                             {this.props.user.job}
                         </div>
                     </div>
