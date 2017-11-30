@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5ee27328d681d2b2913e3bd15bfb369b
+ * @relayHash 223571b34bb2976bc0d14c9a0666234b
  */
 
 /* eslint-disable */
@@ -16,32 +16,21 @@ export type SearchUsersQueryResponse = {|
 
 
 /*
-query SearchUsersQuery {
+query SearchUsersQuery(
+  $searchText: String!
+) {
   viewer {
-    ...ListPage_viewer
+    ...ListPage_viewer_nhk5B
     id
   }
 }
 
-fragment ListPage_viewer on Viewer {
-  allUsers(last: 5, orderBy: createdAt_DESC) {
+fragment ListPage_viewer_nhk5B on Viewer {
+  allUsers(filter: {job_contains: "att"}, last: 5, orderBy: createdAt_DESC) {
     edges {
       node {
         ...UserCard_user
         id
-      }
-    }
-    ... on UserConnection {
-      edges {
-        cursor
-        node {
-          __typename
-          id
-        }
-      }
-      pageInfo {
-        hasPreviousPage
-        startCursor
       }
     }
   }
@@ -56,7 +45,14 @@ fragment UserCard_user on User {
 
 const batch /*: ConcreteBatch*/ = {
   "fragment": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": [
+      {
+        "kind": "LocalArgument",
+        "name": "searchText",
+        "type": "String!",
+        "defaultValue": null
+      }
+    ],
     "kind": "Fragment",
     "metadata": null,
     "name": "SearchUsersQuery",
@@ -72,7 +68,14 @@ const batch /*: ConcreteBatch*/ = {
           {
             "kind": "FragmentSpread",
             "name": "ListPage_viewer",
-            "args": null
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "searchText",
+                "variableName": "searchText",
+                "type": null
+              }
+            ]
           }
         ],
         "storageKey": null
@@ -85,7 +88,14 @@ const batch /*: ConcreteBatch*/ = {
   "metadata": {},
   "name": "SearchUsersQuery",
   "query": {
-    "argumentDefinitions": [],
+    "argumentDefinitions": [
+      {
+        "kind": "LocalArgument",
+        "name": "searchText",
+        "type": "String!",
+        "defaultValue": null
+      }
+    ],
     "kind": "Root",
     "name": "SearchUsersQuery",
     "operation": "query",
@@ -113,6 +123,14 @@ const batch /*: ConcreteBatch*/ = {
                 "kind": "LinkedField",
                 "alias": null,
                 "args": [
+                  {
+                    "kind": "Literal",
+                    "name": "filter",
+                    "value": {
+                      "job_contains": "att"
+                    },
+                    "type": "UserFilter"
+                  },
                   {
                     "kind": "Literal",
                     "name": "last",
@@ -178,98 +196,9 @@ const batch /*: ConcreteBatch*/ = {
                       }
                     ],
                     "storageKey": null
-                  },
-                  {
-                    "kind": "InlineFragment",
-                    "type": "UserConnection",
-                    "selections": [
-                      {
-                        "kind": "LinkedField",
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "UserEdge",
-                        "name": "edges",
-                        "plural": true,
-                        "selections": [
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "cursor",
-                            "storageKey": null
-                          },
-                          {
-                            "kind": "LinkedField",
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "User",
-                            "name": "node",
-                            "plural": false,
-                            "selections": [
-                              {
-                                "kind": "ScalarField",
-                                "alias": null,
-                                "args": null,
-                                "name": "__typename",
-                                "storageKey": null
-                              }
-                            ],
-                            "storageKey": null
-                          }
-                        ],
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "LinkedField",
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "PageInfo",
-                        "name": "pageInfo",
-                        "plural": false,
-                        "selections": [
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "hasPreviousPage",
-                            "storageKey": null
-                          },
-                          {
-                            "kind": "ScalarField",
-                            "alias": null,
-                            "args": null,
-                            "name": "startCursor",
-                            "storageKey": null
-                          }
-                        ],
-                        "storageKey": null
-                      }
-                    ]
                   }
                 ],
-                "storageKey": "allUsers{\"last\":5,\"orderBy\":\"createdAt_DESC\"}"
-              },
-              {
-                "kind": "LinkedHandle",
-                "alias": null,
-                "args": [
-                  {
-                    "kind": "Literal",
-                    "name": "last",
-                    "value": 5,
-                    "type": "Int"
-                  },
-                  {
-                    "kind": "Literal",
-                    "name": "orderBy",
-                    "value": "createdAt_DESC",
-                    "type": "UserOrderBy"
-                  }
-                ],
-                "handle": "connection",
-                "name": "allUsers",
-                "key": "ListPage_allUsers",
-                "filters": []
+                "storageKey": "allUsers{\"filter\":{\"job_contains\":\"att\"},\"last\":5,\"orderBy\":\"createdAt_DESC\"}"
               }
             ]
           }
@@ -278,7 +207,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query SearchUsersQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allUsers(last: 5, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...UserCard_user\n        id\n      }\n    }\n    ... on UserConnection {\n      edges {\n        cursor\n        node {\n          __typename\n          id\n        }\n      }\n      pageInfo {\n        hasPreviousPage\n        startCursor\n      }\n    }\n  }\n}\n\nfragment UserCard_user on User {\n  id\n  name\n  job\n}\n"
+  "text": "query SearchUsersQuery(\n  $searchText: String!\n) {\n  viewer {\n    ...ListPage_viewer_nhk5B\n    id\n  }\n}\n\nfragment ListPage_viewer_nhk5B on Viewer {\n  allUsers(filter: {job_contains: \"att\"}, last: 5, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...UserCard_user\n        id\n      }\n    }\n  }\n}\n\nfragment UserCard_user on User {\n  id\n  name\n  job\n}\n"
 };
 
 module.exports = batch;

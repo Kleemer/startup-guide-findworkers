@@ -27,17 +27,11 @@ type DeleteUserPayload {
   deletedId: ID
 }
 
-# HelloPayload
-type HelloPayload {
-  message: String!
-}
-
 type Mutation {
   updateUser(input: UpdateUserInput!): UpdateUserPayload
   updateOrCreateUser(input: UpdateOrCreateUserInput!): UpdateOrCreateUserPayload
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
   createUser(input: SignupUserInput!): CreateUserPayload!
-  login(input: LoginInput!): LoginPayload!
 }
 
 # An object with an ID
@@ -69,18 +63,6 @@ type Query {
     # The ID of an object
     id: ID!
   ): Node
-}
-
-input LoginInput {
-  email: String!
-  password: String!
-  clientMutationId: String!
-}
-
-
-type LoginPayload {
-  user: User
-  token: String
 }
 
 input SignupUserInput {
@@ -433,9 +415,6 @@ type Viewer {
   allUsers(filter: UserFilter, orderBy: UserOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   user: User
   User(email: String, id: ID): User
-
-  # hello
-  hello(name: String): HelloPayload
   id: ID!
 }
 

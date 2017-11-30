@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import UserCard from './UserCard'
-import { createFragmentContainer, graphql } from 'react-relay'
+import { createRefetchContainer, graphql } from 'react-relay'
 
 class ListPage extends Component {
     render() {
@@ -14,11 +14,14 @@ class ListPage extends Component {
     }
 }
 
-export default createFragmentContainer(ListPage, graphql`
-fragment ListPage_viewer on Viewer {
-  allUsers(filter: { job_contains: searchText }, last: 5, orderBy: createdAt_DESC)
-  @connection(key: "ListPage_allUsers", filters: [])
-  @argumentDefinitions(searchText: { type: "String", defaultValue: "" }) {
+export default createRefetchContainer(ListPage, graphql`
+fragment ListPage_viewer on Viewer 
+@argumentDefinitions(searchText: { type: "String", defaultValue: "" }) {
+  allUsers(filter:
+  {
+    job_contains: "att"
+  },
+  last: 5, orderBy: createdAt_DESC) {
     edges {
       node {
         ...UserCard_user

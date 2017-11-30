@@ -19,28 +19,45 @@ export type ListPage_viewer = {|
 
 
 const fragment /*: ConcreteFragment*/ = {
-  "argumentDefinitions": [],
+  "argumentDefinitions": [
+    {
+      "kind": "LocalArgument",
+      "name": "searchText",
+      "type": "String",
+      "defaultValue": ""
+    }
+  ],
   "kind": "Fragment",
-  "metadata": {
-    "connection": [
-      {
-        "count": null,
-        "cursor": null,
-        "direction": "backward",
-        "path": [
-          "allUsers"
-        ]
-      }
-    ]
-  },
+  "metadata": null,
   "name": "ListPage_viewer",
   "selections": [
     {
       "kind": "LinkedField",
-      "alias": "allUsers",
-      "args": null,
+      "alias": null,
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "filter",
+          "value": {
+            "job_contains": "att"
+          },
+          "type": "UserFilter"
+        },
+        {
+          "kind": "Literal",
+          "name": "last",
+          "value": 5,
+          "type": "Int"
+        },
+        {
+          "kind": "Literal",
+          "name": "orderBy",
+          "value": "createdAt_DESC",
+          "type": "UserOrderBy"
+        }
+      ],
       "concreteType": "UserConnection",
-      "name": "__ListPage_allUsers_connection",
+      "name": "allUsers",
       "plural": false,
       "selections": [
         {
@@ -69,76 +86,9 @@ const fragment /*: ConcreteFragment*/ = {
             }
           ],
           "storageKey": null
-        },
-        {
-          "kind": "InlineFragment",
-          "type": "UserConnection",
-          "selections": [
-            {
-              "kind": "LinkedField",
-              "alias": null,
-              "args": null,
-              "concreteType": "UserEdge",
-              "name": "edges",
-              "plural": true,
-              "selections": [
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "cursor",
-                  "storageKey": null
-                },
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "args": null,
-                  "concreteType": "User",
-                  "name": "node",
-                  "plural": false,
-                  "selections": [
-                    {
-                      "kind": "ScalarField",
-                      "alias": null,
-                      "args": null,
-                      "name": "__typename",
-                      "storageKey": null
-                    }
-                  ],
-                  "storageKey": null
-                }
-              ],
-              "storageKey": null
-            },
-            {
-              "kind": "LinkedField",
-              "alias": null,
-              "args": null,
-              "concreteType": "PageInfo",
-              "name": "pageInfo",
-              "plural": false,
-              "selections": [
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "hasPreviousPage",
-                  "storageKey": null
-                },
-                {
-                  "kind": "ScalarField",
-                  "alias": null,
-                  "args": null,
-                  "name": "startCursor",
-                  "storageKey": null
-                }
-              ],
-              "storageKey": null
-            }
-          ]
         }
       ],
-      "storageKey": null
+      "storageKey": "allUsers{\"filter\":{\"job_contains\":\"att\"},\"last\":5,\"orderBy\":\"createdAt_DESC\"}"
     }
   ],
   "type": "Viewer"

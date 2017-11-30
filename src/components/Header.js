@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { GC_USER_ID, GC_AUTH_TOKEN } from '../constants'
 
 class Header extends Component {
@@ -14,12 +14,7 @@ class Header extends Component {
                     {
                         userId ?
                         <div className="navbar-end">                        
-                            <a className='navbar-item' onClick={() => {
-                                    localStorage.removeItem(GC_USER_ID)
-                                    localStorage.removeItem(GC_AUTH_TOKEN)
-                                    this.props.history.push('/')
-                                }
-                            }>
+                            <a className='navbar-item' onClick={() => this._handleLogout()}>
                             logout</a>
                         </div>
                         :
@@ -33,6 +28,11 @@ class Header extends Component {
             </div>
         )
     }
+    _handleLogout = () => {
+        localStorage.removeItem(GC_USER_ID)
+        localStorage.removeItem(GC_AUTH_TOKEN)
+        this.props.history.push('/')
+    }
 }
 
-export default Header;
+export default withRouter(Header);
