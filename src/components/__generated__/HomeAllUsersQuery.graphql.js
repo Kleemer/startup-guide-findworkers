@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3f7adb32b030fc62073380ea2467dbbf
+ * @relayHash c0b6df16f8cd6774ff54b5fa4b92b38d
  */
 
 /* eslint-disable */
@@ -24,7 +24,7 @@ query HomeAllUsersQuery {
 }
 
 fragment ListPage_viewer on Viewer {
-  allUsers(filter: {job_contains: "att"}, last: 5, orderBy: createdAt_DESC) {
+  allUsers(filter: {job_contains: ""}, last: 5, orderBy: createdAt_DESC) {
     edges {
       node {
         ...UserCard_user
@@ -36,7 +36,9 @@ fragment ListPage_viewer on Viewer {
 
 fragment UserCard_user on User {
   id
-  name
+  firstname
+  lastname
+  company
   job
 }
 */
@@ -104,7 +106,7 @@ const batch /*: ConcreteBatch*/ = {
                     "kind": "Literal",
                     "name": "filter",
                     "value": {
-                      "job_contains": "att"
+                      "job_contains": ""
                     },
                     "type": "UserFilter"
                   },
@@ -156,7 +158,21 @@ const batch /*: ConcreteBatch*/ = {
                                 "kind": "ScalarField",
                                 "alias": null,
                                 "args": null,
-                                "name": "name",
+                                "name": "firstname",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "lastname",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "company",
                                 "storageKey": null
                               },
                               {
@@ -175,7 +191,7 @@ const batch /*: ConcreteBatch*/ = {
                     "storageKey": null
                   }
                 ],
-                "storageKey": "allUsers{\"filter\":{\"job_contains\":\"att\"},\"last\":5,\"orderBy\":\"createdAt_DESC\"}"
+                "storageKey": "allUsers{\"filter\":{\"job_contains\":\"\"},\"last\":5,\"orderBy\":\"createdAt_DESC\"}"
               }
             ]
           }
@@ -184,7 +200,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query HomeAllUsersQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allUsers(filter: {job_contains: \"att\"}, last: 5, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...UserCard_user\n        id\n      }\n    }\n  }\n}\n\nfragment UserCard_user on User {\n  id\n  name\n  job\n}\n"
+  "text": "query HomeAllUsersQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allUsers(filter: {job_contains: \"\"}, last: 5, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...UserCard_user\n        id\n      }\n    }\n  }\n}\n\nfragment UserCard_user on User {\n  id\n  firstname\n  lastname\n  company\n  job\n}\n"
 };
 
 module.exports = batch;

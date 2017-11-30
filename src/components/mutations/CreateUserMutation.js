@@ -1,5 +1,4 @@
 import { commitMutation, graphql } from 'react-relay'
-import { ConnectionHandler } from 'relay-runtime'
 import Environment from '../../Environment'
 
 const mutation = graphql`
@@ -13,14 +12,12 @@ const mutation = graphql`
     }
 `
 
-let tempID = 0
-
-export default (email, name, password, job, callback) => {
+export default (firstname, lastname, company, job, callback) => {
     const variables = {
             input: {
-            email,
-            name,
-            password,
+            firstname,
+            lastname,
+            company,
             job,
             clientMutationId: ""
         }
@@ -31,10 +28,8 @@ export default (email, name, password, job, callback) => {
         {
             mutation,
             variables,
-            onCompleted: (response) => {
-                const id = response.createUser.user.id
-                const token = response.createUser.clientMutationId
-                callback(id, token)
+            onCompleted: () => {
+                callback()
             },
             onError: err => console.error(err)
         }

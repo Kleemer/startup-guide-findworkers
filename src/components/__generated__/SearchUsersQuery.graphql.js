@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 223571b34bb2976bc0d14c9a0666234b
+ * @relayHash f4be16aa5e7a33dc7d9bc351112bdf04
  */
 
 /* eslint-disable */
@@ -17,7 +17,7 @@ export type SearchUsersQueryResponse = {|
 
 /*
 query SearchUsersQuery(
-  $searchText: String!
+  $searchText: UserFilter!
 ) {
   viewer {
     ...ListPage_viewer_nhk5B
@@ -26,7 +26,7 @@ query SearchUsersQuery(
 }
 
 fragment ListPage_viewer_nhk5B on Viewer {
-  allUsers(filter: {job_contains: "att"}, last: 5, orderBy: createdAt_DESC) {
+  allUsers(filter: $searchText, last: 5, orderBy: createdAt_DESC) {
     edges {
       node {
         ...UserCard_user
@@ -38,7 +38,9 @@ fragment ListPage_viewer_nhk5B on Viewer {
 
 fragment UserCard_user on User {
   id
-  name
+  firstname
+  lastname
+  company
   job
 }
 */
@@ -49,7 +51,7 @@ const batch /*: ConcreteBatch*/ = {
       {
         "kind": "LocalArgument",
         "name": "searchText",
-        "type": "String!",
+        "type": "UserFilter!",
         "defaultValue": null
       }
     ],
@@ -92,7 +94,7 @@ const batch /*: ConcreteBatch*/ = {
       {
         "kind": "LocalArgument",
         "name": "searchText",
-        "type": "String!",
+        "type": "UserFilter!",
         "defaultValue": null
       }
     ],
@@ -124,11 +126,9 @@ const batch /*: ConcreteBatch*/ = {
                 "alias": null,
                 "args": [
                   {
-                    "kind": "Literal",
+                    "kind": "Variable",
                     "name": "filter",
-                    "value": {
-                      "job_contains": "att"
-                    },
+                    "variableName": "searchText",
                     "type": "UserFilter"
                   },
                   {
@@ -179,7 +179,21 @@ const batch /*: ConcreteBatch*/ = {
                                 "kind": "ScalarField",
                                 "alias": null,
                                 "args": null,
-                                "name": "name",
+                                "name": "firstname",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "lastname",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "company",
                                 "storageKey": null
                               },
                               {
@@ -198,7 +212,7 @@ const batch /*: ConcreteBatch*/ = {
                     "storageKey": null
                   }
                 ],
-                "storageKey": "allUsers{\"filter\":{\"job_contains\":\"att\"},\"last\":5,\"orderBy\":\"createdAt_DESC\"}"
+                "storageKey": null
               }
             ]
           }
@@ -207,7 +221,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query SearchUsersQuery(\n  $searchText: String!\n) {\n  viewer {\n    ...ListPage_viewer_nhk5B\n    id\n  }\n}\n\nfragment ListPage_viewer_nhk5B on Viewer {\n  allUsers(filter: {job_contains: \"att\"}, last: 5, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...UserCard_user\n        id\n      }\n    }\n  }\n}\n\nfragment UserCard_user on User {\n  id\n  name\n  job\n}\n"
+  "text": "query SearchUsersQuery(\n  $searchText: UserFilter!\n) {\n  viewer {\n    ...ListPage_viewer_nhk5B\n    id\n  }\n}\n\nfragment ListPage_viewer_nhk5B on Viewer {\n  allUsers(filter: $searchText, last: 5, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...UserCard_user\n        id\n      }\n    }\n  }\n}\n\nfragment UserCard_user on User {\n  id\n  firstname\n  lastname\n  company\n  job\n}\n"
 };
 
 module.exports = batch;

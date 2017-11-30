@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2422901684626eff9cec0a3225abbab8
+ * @relayHash a248dd431e3b9cbaaba431925da66207
  */
 
 /* eslint-disable */
@@ -11,10 +11,10 @@
 import type {ConcreteBatch} from 'relay-runtime';
 export type CreateUserMutationVariables = {|
   input: {
-    email: string;
+    company?: ?string;
+    firstname: string;
     job?: ?string;
-    name: string;
-    password: string;
+    lastname: string;
     clientMutationId: string;
   };
 |};

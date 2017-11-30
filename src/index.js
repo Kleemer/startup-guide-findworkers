@@ -5,8 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import Header from './components/Header';
 
 import Home from './components/Home'
-import Login from './components/Login';
-import Signup from './components/Signup';
+import Add from './components/Add';
 import Search from './components/Search';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
@@ -16,8 +15,7 @@ ReactDOM.render(
             <Header/>
             <Switch>
                 <Route exact path='/' component={Home}/>
-                <Route exact path='/login' component={Login}/>
-                <Route exact path='/signup' component={Signup}/>
+                <Route exact path='/add' component={Add}/>
                 <Route exact path='/search' component={Search}/>
                 </Switch>
         </div>

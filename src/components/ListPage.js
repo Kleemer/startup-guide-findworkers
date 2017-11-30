@@ -16,11 +16,8 @@ class ListPage extends Component {
 
 export default createRefetchContainer(ListPage, graphql`
 fragment ListPage_viewer on Viewer 
-@argumentDefinitions(searchText: { type: "String", defaultValue: "" }) {
-  allUsers(filter:
-  {
-    job_contains: "att"
-  },
+@argumentDefinitions(searchText: { type: "UserFilter", defaultValue: { job_contains: ""} }) {
+  allUsers(filter: $searchText,
   last: 5, orderBy: createdAt_DESC) {
     edges {
       node {

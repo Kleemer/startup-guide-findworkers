@@ -19,7 +19,7 @@ class Home extends Component {
           environment={Environment}
           query={HomeAllUsersQuery}
           render={({error, props}) => {
-            if (error) { return <div>{error.source}</div> }
+            if (error) { return <div>{error}</div> }
             else if (props) { return <ListPage viewer={props.viewer} /> }
             return <div>Loading</div>
           }}

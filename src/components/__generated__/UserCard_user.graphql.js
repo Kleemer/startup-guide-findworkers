@@ -10,7 +10,9 @@
 import type {ConcreteFragment} from 'relay-runtime';
 export type UserCard_user = {|
   +id: string;
-  +name: string;
+  +firstname: string;
+  +lastname: string;
+  +company: ?string;
   +job: ?string;
 |};
 */
@@ -33,7 +35,21 @@ const fragment /*: ConcreteFragment*/ = {
       "kind": "ScalarField",
       "alias": null,
       "args": null,
-      "name": "name",
+      "name": "firstname",
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "args": null,
+      "name": "lastname",
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "args": null,
+      "name": "company",
       "storageKey": null
     },
     {

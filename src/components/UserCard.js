@@ -9,12 +9,13 @@ class UserCard extends React.Component {
                 <div className="card">
                     <header className="card-header">
                         <p className="card-header-title">
-                            {this.props.user.name}
+                            {this.props.user.firstname} {this.props.user.lastname}
                         </p>
                     </header>
                     <div className="card-content">
                         <div className="content">
-                            {this.props.user.job}
+                            <div>Company: {this.props.user.company ? <span>{this.props.user.company}</span> : <span>Not specifided</span> }</div>
+                            <div>Job: {this.props.user.job ? <span>{this.props.user.job}</span> : <span>Not specifided</span> }</div>
                         </div>
                     </div>
                 </div>
@@ -26,7 +27,9 @@ class UserCard extends React.Component {
 export default createFragmentContainer(UserCard, graphql`
     fragment UserCard_user on User {
         id
-        name
+        firstname
+        lastname
+        company
         job
     }
 `)

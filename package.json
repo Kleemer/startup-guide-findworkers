@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "relay-compiler": "^1.1.0",    
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
     "babel-loader": "7.1.2",
-    "babel-plugin-relay": "^1.1.0",    
+    "babel-plugin-relay": "^1.1.0",
     "babel-preset-react-app": "^3.1.0",
     "babel-runtime": "6.26.0",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
@@ -33,6 +32,7 @@
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
     "raf": "3.4.0",
+    "relay-compiler": "^1.1.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
@@ -42,9 +42,11 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node scripts/setup.js && node scripts/start.js",
+    "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "graph": "get-graphql-schema https://api.graph.cool/relay/v1/cjai580w41six0149q35eedaz | sc schema.graphql",
+    "relay": "relay-compiler --src ./src --schema ./schema.graphql"
   },
   "dependencies": {
     "react": "^16.1.1",
@@ -52,7 +54,8 @@
     "react-dom": "^16.1.1",
     "react-relay": "^1.4.1",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "relay-runtime": "^1.4.1"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -93,10 +96,8 @@
       "react-app"
     ],
     "plugins": [
-      ["relay", {
-          "compat": true,
-          "schema": "./schema.graphql"
-        }
+      [
+        "relay"
       ]
     ]
   },

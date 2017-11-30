@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
-import { QueryRenderer, graphql } from 'react-relay'
-import Environment from '../Environment'
 import { withRouter } from 'react-router-dom'
 import CreateUserMutation from './mutations/CreateUserMutation'
-import { GC_USER_ID, GC_AUTH_TOKEN } from '../constants'
 
-class Signup extends Component {
+class Add extends Component {
 
     state = {
-        email: '',
-        name: '',
-        password: '',
+        firstname: '',
+        lastname: '',
+        company: '',
         job: ''
     }
 
@@ -19,32 +16,34 @@ class Signup extends Component {
             <div className="hero-body">
                 <div className="container has-text-centered">
                     <div className="title">
-                        Signup
+                        Add profile
                     </div>
                     <div className="field">
-                        <label className="label">Full name *</label>
+                        <label className="label">First name *</label>
                         <div className="control">
                             <input
                             className="input"
-                            value={this.state.name}
-                            onChange={(e) => this.setState({name: e.target.value})}/>
+                            value={this.state.firstname}
+                            onChange={(e) => this.setState({firstname: e.target.value})}/>
                         </div>
                     </div>
 
                     <div className="field">
-                        <label className="label">Email *</label>
+                        <label className="label">Last name *</label>
                         <div className="control">
                             <input
                             className="input"
-                            value={this.state.email}
-                            onChange={(e) => this.setState({email: e.target.value})}/>
+                            value={this.state.lastname}
+                            onChange={(e) => this.setState({lastname: e.target.value})}/>
                         </div>
                     </div>
                     <div className="field">
-                        <label className="label">Password *</label>
+                        <label className="label">Company</label>
                         <div className="control">
-                            <input className="input" type="password" value={this.state.password}
-                            onChange={(e) => this.setState({password: e.target.value})}/>
+                            <input
+                            className="input"
+                            value={this.state.company}
+                            onChange={(e) => this.setState({company: e.target.value})}/>
                         </div>
                     </div>
                     <div className="field">
@@ -55,22 +54,18 @@ class Signup extends Component {
                         </div>
                     </div>
                     {
-                        this.state.email && this.state.name && this.state.password &&
-                        <button onClick={() => this._handleSignup()}>Signup</button>
+                        this.state.firstname && this.state.lastname &&
+                        <button onClick={() => this._handleAdd()}>Add</button>
                     }
                 </div>
             </div>
         )
     }
 
-    _handleSignup = () => {
-        const { email, name, password, job } = this.state
-        CreateUserMutation(email, name, password, job, (id, token) => {
-            localStorage.setItem(GC_USER_ID, id)
-            localStorage.setItem(GC_AUTH_TOKEN, token)    
-            this.props.history.push('/')
-        })
+    _handleAdd = () => {
+        const { firstname, lastname, company, job } = this.state
+        CreateUserMutation(firstname, lastname, company, job, () => { this.props.history.push('/') })
     }
 }
 
-export default withRouter(Signup);
+export default withRouter(Add);

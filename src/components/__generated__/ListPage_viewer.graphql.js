@@ -23,8 +23,10 @@ const fragment /*: ConcreteFragment*/ = {
     {
       "kind": "LocalArgument",
       "name": "searchText",
-      "type": "String",
-      "defaultValue": ""
+      "type": "UserFilter",
+      "defaultValue": {
+        "job_contains": ""
+      }
     }
   ],
   "kind": "Fragment",
@@ -36,11 +38,9 @@ const fragment /*: ConcreteFragment*/ = {
       "alias": null,
       "args": [
         {
-          "kind": "Literal",
+          "kind": "Variable",
           "name": "filter",
-          "value": {
-            "job_contains": "att"
-          },
+          "variableName": "searchText",
           "type": "UserFilter"
         },
         {
@@ -88,7 +88,7 @@ const fragment /*: ConcreteFragment*/ = {
           "storageKey": null
         }
       ],
-      "storageKey": "allUsers{\"filter\":{\"job_contains\":\"att\"},\"last\":5,\"orderBy\":\"createdAt_DESC\"}"
+      "storageKey": null
     }
   ],
   "type": "Viewer"

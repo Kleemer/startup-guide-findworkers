@@ -1,37 +1,19 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { GC_USER_ID, GC_AUTH_TOKEN } from '../constants'
 
 class Header extends Component {
     render() {
-        const userId = localStorage.getItem(GC_USER_ID)        
         return (
             <div className="hero-head">
                 <nav className="navbar">
-                <div id="navbarMenuHeroA" className="navbar-menu">
-                    <Link className="navbar-item" to="/">Home</Link>
-                    <Link className="navbar-item" to="/search">Search</Link>
-                    {
-                        userId ?
-                        <div className="navbar-end">                        
-                            <a className='navbar-item' onClick={() => this._handleLogout()}>
-                            logout</a>
-                        </div>
-                        :
-                        <div className="navbar-end">                        
-                                <Link className="navbar-item" to="/login">Login</Link>
-                                <Link className="navbar-item" to="/signup">Signup</Link>
-                        </div>
-                    }
+                    <div id="navbarMenuHeroA" className="navbar-menu">
+                        <Link className="navbar-item" to="/">Home</Link>
+                        <Link className="navbar-item" to="/search">Search</Link>
+                        <Link className="navbar-item" to="/add">Add profile</Link>
                     </div>
                 </nav>
             </div>
         )
-    }
-    _handleLogout = () => {
-        localStorage.removeItem(GC_USER_ID)
-        localStorage.removeItem(GC_AUTH_TOKEN)
-        this.props.history.push('/')
     }
 }
 
