@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash c0b6df16f8cd6774ff54b5fa4b92b38d
+ * @relayHash 8598efd961070b3dab0f522c887a6e87
  */
 
 /* eslint-disable */
@@ -27,8 +27,8 @@ fragment ListPage_viewer on Viewer {
   allUsers(filter: {job_contains: ""}, last: 5, orderBy: createdAt_DESC) {
     edges {
       node {
-        ...UserCard_user
         id
+        ...UserCard_user
       }
     }
   }
@@ -200,7 +200,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query HomeAllUsersQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allUsers(filter: {job_contains: \"\"}, last: 5, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...UserCard_user\n        id\n      }\n    }\n  }\n}\n\nfragment UserCard_user on User {\n  id\n  firstname\n  lastname\n  company\n  job\n}\n"
+  "text": "query HomeAllUsersQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allUsers(filter: {job_contains: \"\"}, last: 5, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...UserCard_user\n      }\n    }\n  }\n}\n\nfragment UserCard_user on User {\n  id\n  firstname\n  lastname\n  company\n  job\n}\n"
 };
 
 module.exports = batch;

@@ -5,7 +5,7 @@ import { createRefetchContainer, graphql } from 'react-relay'
 class ListPage extends Component {
     render() {
         return (
-            <div>
+            <div key="listpage">
                 {this.props.viewer.allUsers.edges.map(({node}) => 
                 <UserCard key={node.id} user={node}/>
             )}
@@ -21,6 +21,7 @@ fragment ListPage_viewer on Viewer
   last: 5, orderBy: createdAt_DESC) {
     edges {
       node {
+        id
         ...UserCard_user
       }
     }

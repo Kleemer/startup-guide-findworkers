@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f4be16aa5e7a33dc7d9bc351112bdf04
+ * @relayHash 502e6de4e340e469a19e0b504a4e492e
  */
 
 /* eslint-disable */
@@ -29,8 +29,8 @@ fragment ListPage_viewer_nhk5B on Viewer {
   allUsers(filter: $searchText, last: 5, orderBy: createdAt_DESC) {
     edges {
       node {
-        ...UserCard_user
         id
+        ...UserCard_user
       }
     }
   }
@@ -221,7 +221,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query SearchUsersQuery(\n  $searchText: UserFilter!\n) {\n  viewer {\n    ...ListPage_viewer_nhk5B\n    id\n  }\n}\n\nfragment ListPage_viewer_nhk5B on Viewer {\n  allUsers(filter: $searchText, last: 5, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...UserCard_user\n        id\n      }\n    }\n  }\n}\n\nfragment UserCard_user on User {\n  id\n  firstname\n  lastname\n  company\n  job\n}\n"
+  "text": "query SearchUsersQuery(\n  $searchText: UserFilter!\n) {\n  viewer {\n    ...ListPage_viewer_nhk5B\n    id\n  }\n}\n\nfragment ListPage_viewer_nhk5B on Viewer {\n  allUsers(filter: $searchText, last: 5, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        id\n        ...UserCard_user\n      }\n    }\n  }\n}\n\nfragment UserCard_user on User {\n  id\n  firstname\n  lastname\n  company\n  job\n}\n"
 };
 
 module.exports = batch;

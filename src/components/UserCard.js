@@ -5,7 +5,7 @@ class UserCard extends React.Component {
 
     render() {
         return (
-            <div>
+            <div key={this.props.key}>
                 <div className="card">
                     <header className="card-header">
                         <p className="card-header-title">
